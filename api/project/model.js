@@ -1,26 +1,11 @@
-const model = require('../db-model')
+const model = require('../global-model')
 
 const getAllProjects = () => {
-  return model
-    .get('projects')
-    .then((projects) => projects.map(sanitizeProject))
-    .catch(console.log)
+  return model.get('projects', (projects) => projects.map(sanitizeProject))
 }
 
-const getProjectById = (project_id) => {
-  return model
-    .getBy('projects', 'project_id', project_id)
-    .then(([project]) => sanitizeProject(project))
-    .catch(console.log)
-}
-
-const addProject = async (project) => {
-  return model
-    .add('projects', project)
-    .then((project_id) => {
-      return getProjectById(project_id).then(project).catch(console.log)
-    })
-    .catch(console.log)
+const addProject = (newProject) => {
+  return model.add('projects', 'project_id', newProject, sanitizeProject)
 }
 
 // converts mysql3 integers to booleans where appropriate
