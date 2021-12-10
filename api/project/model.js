@@ -1,20 +1,35 @@
-const db = require('../../data/dbConfig')
+const model = require('../db-model')
 
-const getAll = async () => {
-  return await db('projects')
+const getAllProjects = () => {
+  return model
+    .get('projects')
+    .then((projects) => projects.map(sanitizeProject))
+    .catch(console.log)
 }
 
-const getById = async (project_id) => {
-  const [project] = await db('projects as p').where('p.project_id', project_id)
-  return project
+const getProjectById = (project_id) => {
+  return model
+    .getBy('projects', 'project_id', project_id)
+    .then(([project]) => sanitizeProject(project))
+    .catch(console.log)
 }
 
-const add = async (project) => {
-  const project_id = await db('projects').insert(project)
-  return await getById(project_id)
+const addProject = async (project) => {
+  return model
+    .add('projects', project)
+    .then((project_id) => {
+      return getProjectById(project_id).then(project).catch(console.log)
+    })
+    .catch(console.log)
 }
+
+// converts mysql3 integers to booleans where appropriate
+const sanitizeProject = (project) => ({
+  ...project,
+  project_completed: !!project.project_completed,
+})
 
 module.exports = {
-  getAll,
-  add,
+  getAllProjects,
+  addProject,
 }

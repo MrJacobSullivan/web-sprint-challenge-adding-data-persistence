@@ -13,12 +13,6 @@ const validateProject = (req, res, next) => {
   }
 }
 
-const sanitizeProject = (project) => ({
-  ...project,
-  project_completed: !!project.project_completed,
-})
-
 module.exports = {
   validateProject,
-  sanitizeProject,
 }
