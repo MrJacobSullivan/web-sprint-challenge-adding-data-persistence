@@ -7,7 +7,7 @@ exports.seed = (knex, Promise) => {
     },
     {
       resource_name: 'Test Resource 2',
-      resource_description: 'Donec vel rhoncus lacus.',
+      resource_description: null,
     },
     {
       resource_name: 'Test Resource 3',

@@ -9,13 +9,13 @@ exports.seed = (knex, Promise) => {
     },
     {
       task_description: 'Test Task 2',
-      task_notes: '',
+      task_notes: null,
       task_completed: 0,
       project_id: 1,
     },
     {
       task_description: 'Test Task 3',
-      task_notes: '',
+      task_notes: null,
       task_completed: 0,
       project_id: 1,
     },
@@ -27,7 +27,7 @@ exports.seed = (knex, Promise) => {
     },
     {
       task_description: 'Test Task 5',
-      task_notes: '',
+      task_notes: null,
       task_completed: 0,
       project_id: 2,
     },
