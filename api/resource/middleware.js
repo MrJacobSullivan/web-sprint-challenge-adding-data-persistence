@@ -1,16 +1,17 @@
 const Resources = require('./model')
+const Validate = require('../global-middleware')
 
 const validateResource = (req, res, next) => {
   const { resource_name, resource_description: rd } = req.body
 
-  if (resource_name === undefined || typeof resource_name !== 'string') {
-    next({ status: 400, message: 'resource_name is required' })
-  } else {
+  if (Validate.requiredString(resource_name)) {
     req.resource = {
       resource_name,
       resource_description: rd || null,
     }
     next()
+  } else {
+    next({ status: 400, message: 'resource_name is required' })
   }
 }
 

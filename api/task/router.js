@@ -1,21 +1,9 @@
 const router = require('express').Router()
 
 const Tasks = require('./model')
+const { validateTask, validateProjectId } = require('./middleware')
 
 // [GET] /api/tasks
-/*
-  [
-    {
-      "task_id": 1,
-      "task_description": "baz",
-      "task_notes": null,
-      "task_completed": false,
-      "project_name: "bar",
-      "project_description": null.
-    },
-  ]
-*/
-
 router.get('/', async (req, res, next) => {
   Tasks.getAllTasks()
     .then((tasks) => res.json(tasks))
@@ -23,5 +11,10 @@ router.get('/', async (req, res, next) => {
 })
 
 // [POST] /api/tasks
+router.post('/', [validateTask, validateProjectId], (req, res, next) => {
+  Tasks.addTask(req.task)
+    .then((task) => res.status(201).json(task))
+    .catch(next)
+})
 
 module.exports = router

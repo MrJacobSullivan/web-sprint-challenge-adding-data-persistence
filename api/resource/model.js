@@ -1,15 +1,15 @@
-const model = require('../global-model')
+const globalModel = require('../global-model')
 
 const getAllResources = () => {
-  return model.get('resources')
+  return globalModel.get('resources')
 }
 
 const getByResourceName = (resource_name) => {
-  return model.getBy('resources', 'resource_name', resource_name)
+  return globalModel.getBy('resources', 'resource_name', resource_name)
 }
 
 const addResource = (newResource) => {
-  return model.add('resources', 'resource_id', newResource)
+  return globalModel.add('resources', 'resource_id', newResource)
 }
 
 module.exports = {
