@@ -9,10 +9,10 @@ const addProject = (newProject) => {
 }
 
 // converts mysql3 integers to booleans where appropriate
-const sanitizeProject = (project) => ({
-  ...project,
-  project_completed: !!project.project_completed,
-})
+const sanitizeProject = (project) => {
+  const { project_completed: pc } = project
+  return { ...project, project_completed: !!pc }
+}
 
 module.exports = {
   getAllProjects,

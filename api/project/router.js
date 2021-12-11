@@ -4,6 +4,7 @@ const Projects = require('./model')
 const { validateProject } = require('./middleware')
 
 // [GET] /api/projects
+// TODO:
 router.get('/', (req, res, next) => {
   Projects.getAllProjects()
     .then((projects) => res.json(projects))
